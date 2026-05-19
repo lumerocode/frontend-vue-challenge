@@ -1,22 +1,58 @@
 <template>
-  <div class="min-h-screen bg-kambista-lightBg flex flex-col items-center justify-center p-6">
-    <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-lg border border-kambista-border text-center">
-      <h1 class="text-2xl font-bold text-brand-500 mb-2">
-        ¡Identidad Visual Lista!
+  <div class="min-h-screen bg-kambista-appBg flex items-center justify-center px-6">
+    <div class="w-full max-w-[420px] text-center">
+      <img src="/assets/img/brand/logo-main.svg" alt="Kambista" class="h-10 mx-auto mb-6" />
+
+      <h1 class="font-sans font-bold text-2xl text-kambista-navy mb-2">
+        Bienvenido a Kambista
       </h1>
-      
-      <p class="text-slate-600 text-sm mb-6">
-        Este texto ya está usando la tipografía <span class="font-semibold text-slate-800">Montserrat</span> de forma nativa.
+
+      <p class="font-sans text-sm text-neutral-darkText mb-8">
+        La mejor tasa del mercado para tus operaciones de cambio.
       </p>
 
-      <div class="space-y-3">
-        <div class="p-3 bg-kambista-dark text-white rounded-xl text-xs font-mono">
-          Ruta actual: app/pages/index.vue
-        </div>
-        <button class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium rounded-xl transition-colors shadow-md shadow-brand-500/20">
-          Botón Corporativo Kambista
+      <div class="flex flex-col gap-3">
+        <NuxtLink
+          v-if="!authStore.isAuthenticated"
+          :to="ROUTES.login"
+          class="w-full h-[52px] flex items-center justify-center font-sans font-medium text-sm bg-kambista-mint text-neutral-black rounded-md hover:brightness-95 transition-all"
+        >
+          INICIAR SESIÓN
+        </NuxtLink>
+
+        <NuxtLink
+          v-else-if="authStore.needsOnboarding"
+          :to="ROUTES.onboarding"
+          class="w-full h-[52px] flex items-center justify-center font-sans font-medium text-sm bg-kambista-mint text-neutral-black rounded-md hover:brightness-95 transition-all"
+        >
+          COMPLETAR MIS DATOS
+        </NuxtLink>
+
+        <NuxtLink
+          v-else
+          :to="ROUTES.dashboard"
+          class="w-full h-[52px] flex items-center justify-center font-sans font-medium text-sm bg-kambista-mint text-neutral-black rounded-md hover:brightness-95 transition-all"
+        >
+          IR AL PANEL
+        </NuxtLink>
+
+        <button
+          v-if="authStore.isAuthenticated"
+          type="button"
+          class="font-sans font-medium text-sm text-kambista-navy underline"
+          @click="authStore.logout()"
+        >
+          Cerrar sesión
         </button>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+/* Public landing page — accessible with or without authentication. */
+import { useAuthStore } from '~/stores/auth'
+import { ROUTES } from '~/constants/routes'
+
+const authStore = useAuthStore()
+</script>

@@ -16,7 +16,7 @@ module.exports = {
           charcoal: '#192232',
           deepBlue: '#07173E',
           mint: '#00E3C2',
-          mintHover: '#5BE2C4',
+          mintDisabled: '#5BE2C4',
           mintLight: '#B2E7DF',
           blueInfo: '#082774',
           blueLight: '#D2E9FF',
@@ -27,6 +27,7 @@ module.exports = {
           dark: '#0a192f',
           lightBg: '#f4f7f9',
           border: '#e2e8f0',
+          appBg: '#F6F6F9',
         },
         neutral: {
           // Grayscale UI palette
@@ -64,7 +65,8 @@ module.exports = {
         lg: ['18px', '28px'],
         xl: ['20px', '28px'],
         '2xl': ['24px', '32px'],
-        '3xl': ['30px', '36px'],
+        '3xl': ['28px', '34px'],
+        '4xl': ['30px', '36px'],
       },
 
       // UI Border radius tokens
