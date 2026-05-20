@@ -1,14 +1,14 @@
 <template>
   <div class="w-full flex flex-col">
-    <div class="flex justify-center items-center mb-[44px] md:hidden">
+    <div class="flex justify-center items-center mb-[44px] lg:hidden">
       <img src="/assets/img/brand/logo-main.svg" alt="Kambista" class="w-[136px] object-contain" />
     </div>
 
-    <h1 class="font-sans font-normal text-2xl md:text-3xl text-black text-center md:text-left md:font-bold">
+    <h1 class="font-sans font-normal text-2xl lg:text-3xl text-black text-center lg:text-left lg:font-bold">
       Inicia sesión
     </h1>
 
-    <form @submit.prevent="handleLogin" class="flex flex-col gap-5 mt-[70px] md:mt-6 " novalidate>
+    <form @submit.prevent="handleLogin" class="flex flex-col gap-5 mt-[70px] lg:mt-6 " novalidate>
       <BaseInput
         v-model="email"
         label="Correo electrónico"
@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <div class="mt-[72px] md:mt-5">
+      <div class="mt-[72px] lg:mt-5">
         <BaseButton type="submit" :loading="isLoading" :disabled="isSubmitDisabled">
           INICIA SESIÓN
         </BaseButton>

@@ -11,10 +11,10 @@
     >
       <div class="absolute inset-0 bg-kambista-navy/50" aria-hidden="true" />
 
-      <div class="relative w-full max-w-[400px] bg-neutral-white rounded-xl shadow-lg px-6 py-8 md:px-8 md:py-10">
+      <div class="relative w-full max-w-[400px] bg-neutral-white rounded-xl shadow-lg px-6 py-8 lg:px-8 lg:py-10">
         <h2
           :id="titleId"
-          class="font-sans font-semibold text-base md:text-lg text-kambista-navy text-center leading-snug"
+          class="font-sans font-semibold text-base lg:text-lg text-kambista-navy text-center leading-snug"
         >
           {{ title }}
         </h2>

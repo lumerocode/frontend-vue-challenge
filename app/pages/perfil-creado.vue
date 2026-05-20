@@ -3,14 +3,14 @@
     <img
       src="/assets/img/illustrations/hand-holding-phone.svg"
       alt=""
-      class="w-[200px] md:w-100% h-auto mb-[28px]"
+      class="w-[200px] lg:w-100% h-auto mb-[28px]"
     />
 
-    <h2 class="font-sans font-bold text-xl md:text-2xl text-kambista-navy leading-snug mb-[28px]">
+    <h2 class="font-sans font-bold text-xl lg:text-2xl text-kambista-navy leading-snug mb-[28px]">
       ¡Felicitaciones {{ displayName }}, tu perfil ha sido creado!
     </h2>
 
-    <p class="font-sans text-sm md:text-base text-neutral-darkText leading-relaxed mb-10 md:mb-16 max-w-[360px]">
+    <p class="font-sans text-sm lg:text-base text-neutral-darkText leading-relaxed mb-10 lg:mb-16 max-w-[360px]">
       Ya puedes empezar a <em class="italic">Kambiar</em> con la mejor tasa del mercado
     </p>
 

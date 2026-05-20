@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full min-h-screen grid grid-cols-1 md:grid-cols-10 bg-kambista-appBg">
-    <aside class="hidden md:flex md:col-span-5 bg-gradient-auth flex-col justify-between p-12 text-neutral-white relative overflow-hidden">
+  <div class="w-full min-h-screen grid grid-cols-1 lg:grid-cols-10 bg-kambista-appBg">
+    <aside class="hidden lg:flex lg:col-span-5 bg-gradient-auth flex-col justify-between p-12 text-neutral-white relative overflow-hidden">
       
       <div class="relative z-10 flex flex-col gap-20 my-auto w-full max-w-[545px] mx-auto">
         <div class="flex justify-center w-full">
@@ -35,8 +35,8 @@
       </div>
     </aside>
 
-    <main class="col-span-1 md:col-span-5 flex flex-col justify-center items-center px-6 md:px-16 py-12 bg-kambista-appBg min-h-screen">
-      <div class="w-full max-w-100% mx-auto flex flex-col justify-center md:max-w-[343px]">
+    <main class="col-span-1 lg:col-span-5 flex flex-col justify-center items-center px-6 lg:px-16 py-12 bg-kambista-appBg min-h-screen">
+      <div class="w-full max-w-100% mx-auto flex flex-col justify-center lg:max-w-[343px]">
         <slot />
       </div>
     </main>

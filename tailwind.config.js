@@ -39,6 +39,7 @@ module.exports = {
           mutedText: '#666666',
           grayLight: '#CCCCCC',
           grayBg: '#EEEDED',
+          grayChangeMoney: '#66666680',
         }
       },
       
@@ -57,6 +58,8 @@ module.exports = {
         medium: '500',
         semibold: '600',
         bold: '700',
+        extrabold:'800',
+        superbold:'900',
       },
       fontSize: {
         xs: ['12px', '16px'],

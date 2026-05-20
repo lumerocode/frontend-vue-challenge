@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex flex-col">
-    <h1 class="font-sans font-bold text-xl md:text-2xl text-kambista-navy text-center mb-6 md:mb-8">
+    <h1 class="font-sans font-bold text-xl lg:text-2xl text-kambista-navy text-center mb-6 lg:mb-8">
       Completa tus datos
     </h1>
 
@@ -20,18 +20,18 @@
           Documento
         </span>
         <div class="flex gap-3">
-          <div class="w-[40%] min-w-0 md:w-1/2">
+          <div class="w-[40%] min-w-0 lg:w-1/2">
             <BaseSelect
               v-model="documentType"
               placeholder="Tipo"
               :options="documentTypeOptions"
-              wrapper-class="shrink-0 md:shrink"
+              wrapper-class="shrink-0 lg:shrink"
               :error="errors.documentType"
               @blur="touchField('documentType')"
               @change="touchField('documentType')"
             />
           </div>
-          <div class="w-[60%] shrink-0 min-w-0 md:w-1/2">
+          <div class="w-[60%] shrink-0 min-w-0 lg:w-1/2">
             <BaseInput
               v-model="documentNumber"
               placeholder="N° de documento"
@@ -47,8 +47,8 @@
         Tu documento de identidad debe coincidir con tus datos para evitar inconvenientes al momento de hacer una primera operación.
       </InfoAlert>
 
-      <div class="flex flex-row gap-3 md:flex-col md:gap-5">
-        <div class="w-1/2 min-w-0 md:w-full">
+      <div class="flex flex-row gap-3 lg:flex-col lg:gap-5">
+        <div class="w-1/2 min-w-0 lg:w-full">
           <BaseInput
             v-model="phone"
             label="Celular"
@@ -60,7 +60,7 @@
             @input="touchField('phone')"
           />
         </div>
-        <div class="w-1/2 min-w-0 md:w-full">
+        <div class="w-1/2 min-w-0 lg:w-full">
           <BaseInput
             v-model="birthDate"
             label="Fecha de nacimiento"
@@ -95,9 +95,9 @@
         </BaseCheckbox>
       </div>
 
-      <div class="mt-2 md:mt-4">
+      <div class="mt-2 lg:mt-4">
         <BaseButton type="submit" :loading="isLoading" :disabled="isSubmitDisabled">
-          <span class="md:inline">REGISTRARME</span>
+          <span class="lg:inline">REGISTRARME</span>
         </BaseButton>
       </div>
     </form>

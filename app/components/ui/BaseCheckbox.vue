@@ -23,7 +23,7 @@
           class="w-100%"
         />
       </span>
-      <span class="font-sans text-xs md:text-sm text-neutral-darkText leading-snug">
+      <span class="font-sans text-xs lg:text-sm text-neutral-darkText leading-snug">
         <slot />
       </span>
     </label>

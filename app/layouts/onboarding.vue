@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen bg-kambista-appBg flex flex-col">
     <header class="bg-neutral-white border-b border-neutral-grayBorder shrink-0">
-      <div class="max-w-[1300px] mx-auto px-6 md:px-8 h-[50px] md:h-[91px] flex items-center justify-between">
-        <img src="/assets/img/brand/logo-main.svg" alt="Kambista" class="object-contain w-[90px] md:w-[160px]" />
+      <div class="max-w-[1300px] mx-auto px-6 lg:px-8 h-[50px] lg:h-[91px] flex items-center justify-between">
+        <img src="/assets/img/brand/logo-main.svg" alt="Kambista" class="object-contain w-[90px] lg:w-[160px]" />
 
         <button
           type="button"
-          class="hidden md:flex items-center gap-2 font-sans font-medium text-base text-kambista-navy hover:opacity-80 transition-opacity"
+          class="hidden lg:flex items-center gap-2 font-sans font-medium text-base text-kambista-navy hover:opacity-80 transition-opacity"
           @click="handleBack"
         >
           <img :src="iconArrowLeft" alt="" class="w-5 h-5" />
@@ -15,7 +15,7 @@
 
         <button
           type="button"
-          class="md:hidden flex items-center gap-2 font-sans font-semibold text-sm text-kambista-navy hover:opacity-80 transition-opacity"
+          class="lg:hidden flex items-center gap-2 font-sans font-semibold text-sm text-kambista-navy hover:opacity-80 transition-opacity"
           @click="handleBack"
         >
           Cerrar sesión
@@ -24,9 +24,9 @@
       </div>
     </header>
 
-    <main class="flex-1 flex justify-center px-6 md:px-10 py-8 md:py-10">
-      <div class="w-full max-w-100% md:max-w-[525px]">
-        <div class="md:bg-neutral-white md:rounded-xl md:shadow-sm md:px-10 md:py-10 md:border md:border-neutral-grayBg">
+    <main class="flex-1 flex justify-center px-6 lg:px-10 py-8 lg:py-10">
+      <div class="w-full max-w-100% lg:max-w-[525px]">
+        <div class="lg:bg-neutral-white lg:rounded-xl lg:shadow-sm lg:px-10 lg:py-10 lg:border lg:border-neutral-grayBg">
           <slot />
         </div>
       </div>
