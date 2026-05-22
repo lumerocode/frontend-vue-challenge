@@ -1,7 +1,7 @@
 <template>
   <aside
     class="relative flex flex-col bg-neutral-white h-screen shrink-0 transition-[width] duration-300 ease-in-out"
-    :class="mobile ? 'w-[290px] overflow-y-auto' : collapsed ? 'w-[72px]' : 'w-[320px]'"
+    :class="mobile ? 'w-[290px] overflow-y-scroll' : collapsed ? 'w-[72px]' : 'w-[320px]'"
   >
     <div
       class="flex items-center justify-center shrink-0 py-4"

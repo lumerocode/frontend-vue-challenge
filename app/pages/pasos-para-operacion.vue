@@ -175,7 +175,7 @@
         <div v-else-if="currentStep === 2" class="mx-auto w-full max-w-[536px] lg:px-0">
           <div class="text-neutral-darkText font-medium text-base">
             <p class="text-center">
-              El tipo de cambio podría actualizarse a las: <span class="font-semibold text-lg lg:text-xl">13:15</span>
+              El tipo de cambio podría actualizarse a las: <span class="font-semibold text-lg lg:text-xl">{{ updateTime }}</span>
             </p>
           </div>
           <div class="bg-neutral-white rounded-md border border-neutral-grayBorder p-6 lg:p-8 shadow-sm mt-4 lg:mt-8">
@@ -278,7 +278,7 @@
 
 <script setup lang="ts">
 import BankAccountsModal from '@/components/shared/BankAccountsModal.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import type { SelectOption } from '~/types/components'
 import { ROUTES } from '~/constants/routes'
 import { useRouter } from 'vue-router'
@@ -347,6 +347,7 @@ const selectedReceiverAccount = ref<ReceiverAccount | null>(null)
 const currentStep = ref(1)
 const selectedReceiptFile = ref<File | null>(null)
 const isSubmitting = ref(false)
+const updateTime = ref<string>('13:15')
 
 const showAccountsModal = ref(false)
 const showInfoSection = ref(true)
@@ -361,6 +362,16 @@ const currentRateText = '3.53'
 function goToStep3() {
   currentStep.value = 3
 }
+
+watch(currentStep, (newStep) => {
+  if (newStep === 2) {
+    const now = new Date()
+    const futureTime = new Date(now.getTime() + 8 * 60 * 60 * 1000)
+    const hours = String(futureTime.getHours()).padStart(2, '0')
+    const minutes = String(futureTime.getMinutes()).padStart(2, '0')
+    updateTime.value = `${hours}:${minutes}`
+  }
+})
 
 const isReceiptUploadDisabled = computed(() => !selectedReceiptFile.value)
 
