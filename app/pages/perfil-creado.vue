@@ -16,7 +16,7 @@
       </p>
 
       <div class="w-full max-w-[400px]">
-        <BaseButton type="button" @click="handleContinue">
+        <BaseButton type="button" :loading="isLoading" @click="handleContinue">
           CONTINUAR
         </BaseButton>
       </div>
@@ -29,18 +29,27 @@
 import { useAuthStore } from '~/stores/auth'
 import { ROUTES } from '~/constants/routes'
 import BaseButton from '@/components/ui/BaseButton.vue'
+import { computed, ref } from 'vue'
 
 definePageMeta({
   layout: 'basic-success'
 })
 
 const authStore = useAuthStore()
+const isLoading = ref(false)
 
 const displayName = computed(() => authStore.userDisplayName ?? 'Usuario')
 
 /* Marks the profile as completed and navigates to the dashboard. */
 const handleContinue = async () => {
-  authStore.completeProfile()
-  await navigateTo(ROUTES.dashboard, { replace: true })
+  if (isLoading.value) return
+  isLoading.value = true
+  try {
+    authStore.completeProfile()
+    await new Promise(resolve => setTimeout(resolve, 800))
+    await navigateTo(ROUTES.dashboard, { replace: true })
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>

@@ -40,7 +40,7 @@
         </p>
       </div>
       <div>
-        <BaseButton type="button" class="w-full" @click="goHome">
+        <BaseButton type="button" class="w-full" :loading="isLoading" @click="goHome">
           VOLVER A INICIO
         </BaseButton>
       </div>
@@ -49,17 +49,24 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { ROUTES } from '~/constants/routes'
 import transactionSuccess from '@/assets/img/illustrations/transaction-success.svg'
 import giftReward from '@/assets/img/illustrations/gift-rewards.svg'
 import piggyBank from '@/assets/img/illustrations/piggy-bank-coins.svg'
 
-const router = useRouter()
+const isLoading = ref(false)
 
 const goHome = async () => {
-  await router.push(ROUTES.dashboard)
+  if (isLoading.value) return
+  isLoading.value = true
+  try {
+    await new Promise(resolve => setTimeout(resolve, 800))
+    await navigateTo(ROUTES.dashboard)
+  } finally {
+    isLoading.value = false
+  }
 }
 
 definePageMeta({

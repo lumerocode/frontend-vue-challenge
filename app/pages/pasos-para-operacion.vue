@@ -364,15 +364,17 @@ function goToStep3() {
 
 const isReceiptUploadDisabled = computed(() => !selectedReceiptFile.value)
 
-function submitReceipt() {
+async function submitReceipt() {
   if (isSubmitting.value || !selectedReceiptFile.value) return
 
   isSubmitting.value = true
 
-  setTimeout(() => {
+  try {
+    await new Promise(resolve => setTimeout(resolve, 800))
+    await navigateTo(ROUTES.receiptSent)
+  } finally {
     isSubmitting.value = false
-    router.push(ROUTES.receiptSent)
-  }, 800)
+  }
 }
 
 const selectedReceiverOption = computed<SelectOption[]>(() => {

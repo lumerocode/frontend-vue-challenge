@@ -177,7 +177,7 @@
         </div>
       </div>
 
-      <BaseButton type="button" :disabled="isStartDisabled" @click="handleStartOperation">
+      <BaseButton type="button" :disabled="isStartDisabled" :loading="isLoadingOperation" @click="handleStartOperation">
         INICIAR OPERACIÓN
       </BaseButton>
     </div>
@@ -230,6 +230,7 @@ const couponCode = ref('')
 const couponApplied = ref(false)
 const couponMessage = ref('')
 const couponMessageType = ref<'success' | 'error' | ''>('')
+const isLoadingOperation = ref(false)
 
 let calculateTimer: ReturnType<typeof setTimeout> | null = null
 let calculateRequestId = 0
@@ -530,9 +531,15 @@ function swapCurrencies() {
   scheduleCalculate()
 }
 
-function handleStartOperation() {
-  if (isStartDisabled.value) return
-  navigateTo(ROUTES.operationSteps)
+async function handleStartOperation() {
+  if (isStartDisabled.value || isLoadingOperation.value) return
+  isLoadingOperation.value = true
+  try {
+    await new Promise(resolve => setTimeout(resolve, 800))
+    await navigateTo(ROUTES.operationSteps)
+  } finally {
+    isLoadingOperation.value = false
+  }
 }
 
 onMounted(async () => {
