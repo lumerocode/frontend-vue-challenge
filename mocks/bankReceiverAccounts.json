@@ -1,34 +1,10 @@
 [
   {
-    "id": "1779434389288",
-    "accountType": "Checking Account",
-    "name": "BBVA",
-    "alias": "Luis MR",
-    "accountNumber": "12312321313131313131",
-    "currency": "PEN"
-  },
-  {
-    "id": "1779419919061",
+    "id": "1779466716271",
     "accountType": "Savings Account",
-    "name": "Interbank",
-    "alias": "Luis MR",
-    "accountNumber": "232323232323232323",
-    "currency": "PEN"
-  },
-  {
-    "id": "1779341971272",
-    "accountType": "Savings Account",
-    "name": "Pichincha",
-    "alias": "Luis MR",
-    "accountNumber": "999999999999",
-    "currency": "PEN"
-  },
-  {
-    "id": "1779341769317",
-    "accountType": "Savings Account",
-    "name": "BCP",
-    "alias": "Luis MR",
-    "accountNumber": "111111111111",
+    "name": "Scotiabank",
+    "alias": "Luis MR.",
+    "accountNumber": "17171717177171717117",
     "currency": "PEN"
   }
 ]

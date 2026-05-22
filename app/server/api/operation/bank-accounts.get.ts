@@ -1,5 +1,4 @@
-import { promises as fs } from 'node:fs'
-import { resolve } from 'node:path'
+import bankAccounts from '../../../../mocks/bankAccounts.json'
 
 interface BankAccountOption {
   id: string
@@ -7,8 +6,6 @@ interface BankAccountOption {
   alias: string
 }
 
-export default defineEventHandler(async () => {
-  const filePath = resolve(process.cwd(), 'mocks', 'bankAccounts.json')
-  const raw = await fs.readFile(filePath, 'utf-8')
-  return JSON.parse(raw) as BankAccountOption[]
+export default defineEventHandler(() => {
+  return bankAccounts as BankAccountOption[]
 })
