@@ -4,5 +4,7 @@ export const ROUTES = {
   login: '/login',
   onboarding: '/completar-tus-datos',
   profileSuccess: '/perfil-creado',
-  dashboard: '/dashboard'
+  dashboard: '/dashboard',
+  operationSteps: '/pasos-para-operacion',
+  receiptSent: '/constancia-enviada'
 } as const

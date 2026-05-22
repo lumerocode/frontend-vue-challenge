@@ -1,184 +1,186 @@
 <template>
-  <div class="w-full max-w-[520px] mx-auto flex flex-col gap-5 lg:gap-6">
-    <div class="rounded-xl shadow-sm">
-      <!-- Exchange rate tabs -->
-      <div class="flex">
-        <button
-          type="button"
-          class="flex-1 py-[14px] font-sans font-bold text-sm transition-colors rounded-tl-[6px] rounded-tr-[6px] border border-neutral-grayBg height-[52px] lg:font-extrabold lg:text-lg"
-          :class="activeTab === 'buy'
-            ? 'bg-kambista-navy text-neutral-white'
-            : 'bg-neutral-white text-neutral-grayChangeMoney border-b border-neutral-grayBorder'"
-          @click="setActiveTab('buy')"
-        >
-          Compra: {{ compraRate }}
-        </button>
-        <button
-          type="button"
-          class="flex-1 py-[14px] font-sans font-extrabold text-sm transition-colors border-l border-neutral-grayBg rounded-tl-[6px] rounded-tr-[6px] lg:font-extrabold lg:text-lg"
-          :class="activeTab === 'sell'
-            ? 'bg-kambista-deepBlue text-neutral-white'
-            : 'bg-neutral-white text-neutral-grayChangeMoney border border-neutral-grayBg'"
-          @click="setActiveTab('sell')"
-        >
-          Venta: {{ ventaRate }}
-        </button>
-      </div>
-
-      <div class="p-5 lg:pt-8 lg:pb-6 lg:px-[52px] bg-neutral-white overflow-visible rounded-bl-[16px] rounded-br-[16px]">
-        <!-- Amount inputs -->
-        <div class="relative overflow-visible">
-          <div class="relative z-20 flex rounded-[8px] rounded-[8px] border border-neutral-grayBorder mb-4 overflow-visible">
-            <div class="flex flex-col justify-center flex-1 min-w-0 bg-neutral-grayBorder px-6 rounded-tl-[8px] rounded-bl-[8px]">
-              <p class="font-sans text-sm font-semibold text-kambista-navy mb-1">
-                ¿Cuánto envías?
-              </p>
-              <input
-                :value="sendDisplay"
-                type="text"
-                inputmode="decimal"
-                autocomplete="off"
-                class="w-full bg-transparent font-sans font-bold text-xl lg:text-xl text-kambista-navy focus:outline-none p-0"
-                :disabled="isCalculating"
-                @focus="onSendFocus"
-                @blur="onSendBlur"
-                @input="onSendInput"
-              />
-              <p v-if="minAmountError" class="mt-1 font-sans text-xs text-kambista-errorRed">
-                {{ minAmountError }}
-              </p>
-            </div>
-            <ExchangeCurrencySelect
-              :model-value="sendCurrency"
-              placement="down"
-              aria-label="Moneda que envías"
-              @update:model-value="onSendCurrencyChange"
-            />
-          </div>
-
-          <!-- Swap -->
+  <div class="w-full flex flex-col justify-center items-center lg:h-[calc(100vh-172px)]">
+    <div class="w-full max-w-[520px] mx-auto flex flex-col gap-5 lg:gap-6">
+      <div class="rounded-xl shadow-sm">
+        <!-- Exchange rate tabs -->
+        <div class="flex">
           <button
             type="button"
-            class="absolute right-[78px] lg:right-[126px] top-1/2 -translate-y-1/2 z-30 size-14 lg:size-16 overflow-hidden rounded-full border-0 bg-transparent p-0"
-            aria-label="Intercambiar monedas"
-            :disabled="isCalculating"
-            @click="swapCurrencies"
+            class="flex-1 py-[14px] font-sans font-bold text-sm transition-colors rounded-tl-[6px] rounded-tr-[6px] border border-neutral-grayBg height-[52px] lg:font-extrabold lg:text-lg"
+            :class="activeTab === 'buy'
+              ? 'bg-kambista-navy text-neutral-white'
+              : 'bg-neutral-white text-neutral-grayChangeMoney border-b border-neutral-grayBorder'"
+            @click="setActiveTab('buy')"
           >
-            <span
-              ref="switchIconRef"
-              class="flex size-12 lg:size-[62px] items-center justify-center will-change-transform"
+            Compra: {{ compraRate }}
+          </button>
+          <button
+            type="button"
+            class="flex-1 py-[14px] font-sans font-extrabold text-sm transition-colors border-l border-neutral-grayBg rounded-tl-[6px] rounded-tr-[6px] lg:font-extrabold lg:text-lg"
+            :class="activeTab === 'sell'
+              ? 'bg-kambista-deepBlue text-neutral-white'
+              : 'bg-neutral-white text-neutral-grayChangeMoney border border-neutral-grayBg'"
+            @click="setActiveTab('sell')"
+          >
+            Venta: {{ ventaRate }}
+          </button>
+        </div>
+
+        <div class="p-5 lg:pt-8 lg:pb-6 lg:px-[52px] bg-neutral-white overflow-visible rounded-bl-[16px] rounded-br-[16px]">
+          <!-- Amount inputs -->
+          <div class="relative overflow-visible">
+            <div class="relative z-20 flex rounded-[8px] rounded-[8px] border border-neutral-grayBorder mb-4 overflow-visible">
+              <div class="flex flex-col justify-center flex-1 min-w-0 bg-neutral-grayBorder px-6 rounded-tl-[8px] rounded-bl-[8px]">
+                <p class="font-sans text-sm font-semibold text-kambista-navy mb-1">
+                  ¿Cuánto envías?
+                </p>
+                <input
+                  :value="sendDisplay"
+                  type="text"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  class="w-full bg-transparent font-sans font-bold text-xl lg:text-xl text-kambista-navy focus:outline-none p-0"
+                  :disabled="isCalculating"
+                  @focus="onSendFocus"
+                  @blur="onSendBlur"
+                  @input="onSendInput"
+                />
+                <p v-if="minAmountError" class="mt-1 font-sans text-xs text-kambista-errorRed">
+                  {{ minAmountError }}
+                </p>
+              </div>
+              <ExchangeCurrencySelect
+                :model-value="sendCurrency"
+                placement="down"
+                aria-label="Moneda que envías"
+                @update:model-value="onSendCurrencyChange"
+              />
+            </div>
+
+            <!-- Swap -->
+            <button
+              type="button"
+              class="absolute right-[78px] lg:right-[126px] top-1/2 -translate-y-1/2 z-30 size-14 lg:size-16 overflow-hidden rounded-full border-0 bg-transparent p-0"
+              aria-label="Intercambiar monedas"
+              :disabled="isCalculating"
+              @click="swapCurrencies"
             >
-              <img
-                :src="iconSwitch"
-                alt=""
-                class="size-full object-contain pointer-events-none select-none"
-              />
-            </span>
-          </button>
+              <span
+                ref="switchIconRef"
+                class="flex size-12 lg:size-[62px] items-center justify-center will-change-transform"
+              >
+                <img
+                  :src="iconSwitch"
+                  alt=""
+                  class="size-full object-contain pointer-events-none select-none"
+                />
+              </span>
+            </button>
 
-          <!-- Receive -->
-          <div class="relative z-10 flex rounded-[8px] rounded-[8px] border border-neutral-grayBorder overflow-visible">
-            <div class="flex flex-col justify-center flex-1 min-w-0 bg-neutral-grayBorder px-6 rounded-tl-[8px] rounded-bl-[8px]">
-              <p class="font-sans text-sm font-semibold text-kambista-navy mb-1">
-                Entonces recibes
+            <!-- Receive -->
+            <div class="relative z-10 flex rounded-[8px] rounded-[8px] border border-neutral-grayBorder overflow-visible">
+              <div class="flex flex-col justify-center flex-1 min-w-0 bg-neutral-grayBorder px-6 rounded-tl-[8px] rounded-bl-[8px]">
+                <p class="font-sans text-sm font-semibold text-kambista-navy mb-1">
+                  Entonces recibes
+                </p>
+                <input
+                  :value="receiveDisplay"
+                  type="text"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  class="w-full bg-transparent font-sans font-bold text-xl lg:text-xl text-kambista-navy focus:outline-none p-0"
+                  :disabled="isCalculating"
+                  @focus="onReceiveFocus"
+                  @blur="onReceiveBlur"
+                  @input="onReceiveInput"
+                />
+              </div>
+              <ExchangeCurrencySelect
+                :model-value="receiveCurrency"
+                placement="up"
+                aria-label="Moneda que recibes"
+                @update:model-value="onReceiveCurrencyChange"
+              />
+            </div>
+          </div>
+
+          <!-- Savings & Koinks -->
+          <div class="flex flex-wrap items-center justify-between gap-3 mt-4 mb-6 font-sans text-sm">
+            <div>
+              <p class="text-kambista-navy">
+                Ahorro estimado:
               </p>
-              <input
-                :value="receiveDisplay"
-                type="text"
-                inputmode="decimal"
-                autocomplete="off"
-                class="w-full bg-transparent font-sans font-bold text-xl lg:text-xl text-kambista-navy focus:outline-none p-0"
-                :disabled="isCalculating"
-                @focus="onReceiveFocus"
-                @blur="onReceiveBlur"
-                @input="onReceiveInput"
-              />
+              <p class="font-bold text-kambista-navy"">
+                {{ savingsDisplay }}
+              </p>
             </div>
-            <ExchangeCurrencySelect
-              :model-value="receiveCurrency"
-              placement="up"
-              aria-label="Moneda que recibes"
-              @update:model-value="onReceiveCurrencyChange"
-            />
-          </div>
-        </div>
-
-        <!-- Savings & Koinks -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mt-4 mb-6 font-sans text-sm">
-          <div>
-            <p class="text-kambista-navy">
-              Ahorro estimado:
-            </p>
-            <p class="font-bold text-kambista-navy"">
-              {{ savingsDisplay }}
-            </p>
-          </div>
-          <div class="flex flex-col items-end">
-            <span class="text-kambista-navy">Koinks:</span>
-            <div class="flex flex-row items-center gap-1">
-              <img :src="iconInfo" alt="Información sobre Koinks" class="w-5 h-5 shrink-0" />
-              <span class="font-bold text-kambista-navy">{{ koinksDisplay }}</span>
-              <img :src="iconCoin" alt="" class="w-5 h-5 shrink-0" />
+            <div class="flex flex-col items-end">
+              <span class="text-kambista-navy">Koinks:</span>
+              <div class="flex flex-row items-center gap-1">
+                <img :src="iconInfo" alt="Información sobre Koinks" class="w-5 h-5 shrink-0" />
+                <span class="font-bold text-kambista-navy">{{ koinksDisplay }}</span>
+                <img :src="iconCoin" alt="" class="w-5 h-5 shrink-0" />
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Coupon -->
-        <div
-          class="flex rounded-lg overflow-hidden border bg-neutral-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-          :class="couponMessageType === 'error'
-            ? 'border-kambista-errorRed'
-            : couponMessageType === 'success'
-              ? 'border-kambista-mint'
-              : 'border-neutral-grayBorder'"
-        >
-          <div class="flex items-center flex-1 min-w-0 pl-2 gap-2">
-            <img :src="iconTag" alt="" class="hidden lg:block w-[38px] shrink-0 mb-[6px]" />
-            <input
-              v-model="couponCode"
-              type="text"
-              placeholder="Ingresa el cupón"
-              class="flex-1 min-w-0 h-[46px] font-sans text-sm bg-transparent placeholder:text-neutral-grayPlaceholder focus:outline-none placeholder:text-center"
-              @keyup.enter="applyCoupon"
-            />
-          </div>
-          <button
-            type="button"
-            class="h-[47px] px-6 bg-kambista-navy text-neutral-white font-sans font-normal text-xs uppercase shrink-0 hover:brightness-110 transition-all disabled:opacity-60"
-            :disabled="!couponCode.trim()"
-            @click="applyCoupon"
+          <!-- Coupon -->
+          <div
+            class="flex rounded-lg overflow-hidden border bg-neutral-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+            :class="couponMessageType === 'error'
+              ? 'border-kambista-errorRed'
+              : couponMessageType === 'success'
+                ? 'border-kambista-mint'
+                : 'border-neutral-grayBorder'"
           >
-            APLICAR
-          </button>
-        </div>
-        <p
-          v-if="couponMessage"
-          class="mt-1.5 font-sans text-xs"
-          :class="couponMessageType === 'success' ? 'text-kambista-navy' : 'text-kambista-errorRed'"
-        >
-          {{ couponMessage }}
-        </p>
+            <div class="flex items-center flex-1 min-w-0 pl-2 gap-2">
+              <img :src="iconTag" alt="" class="hidden lg:block w-[38px] shrink-0 mb-[6px]" />
+              <input
+                v-model="couponCode"
+                type="text"
+                placeholder="Ingresa el cupón"
+                class="flex-1 min-w-0 h-[46px] font-sans text-sm bg-transparent placeholder:text-neutral-grayPlaceholder focus:outline-none placeholder:text-center"
+                @keyup.enter="applyCoupon"
+              />
+            </div>
+            <button
+              type="button"
+              class="h-[47px] px-6 bg-kambista-navy text-neutral-white font-sans font-normal text-xs uppercase shrink-0 hover:brightness-110 transition-all disabled:opacity-60"
+              :disabled="!couponCode.trim()"
+              @click="applyCoupon"
+            >
+              APLICAR
+            </button>
+          </div>
+          <p
+            v-if="couponMessage"
+            class="mt-1.5 font-sans text-xs"
+            :class="couponMessageType === 'success' ? 'text-kambista-navy' : 'text-kambista-errorRed'"
+          >
+            {{ couponMessage }}
+          </p>
 
-        <!-- Promo -->
-         <div class="flex justify-center">
-          <div class="flex items-center gap-4 mt-5 pt-4 lg:w-[295px]">
-            <img :src="iconStar" alt="" class="w-[26px] shrink-0 mt-0.5" />
-            <div class="flex flex-col justify-center text-xs">
-              <p class="font-sans text-sm text-kambista-navy leading-relaxed">
-                ¿Monto mayor a $5.000 o S/18.000?
-              </p>
-              <p class="font-bold text-kambista-navy underline cursor-pointer">
-                ¡Obtén un Tipo de Cambio Preferencial!
-              </p>
+          <!-- Promo -->
+          <div class="flex justify-center">
+            <div class="flex items-center gap-4 mt-5 pt-4 lg:w-[295px]">
+              <img :src="iconStar" alt="" class="w-[26px] shrink-0 mt-0.5" />
+              <div class="flex flex-col justify-center text-xs">
+                <p class="font-sans text-sm text-kambista-navy leading-relaxed">
+                  ¿Monto mayor a $5.000 o S/18.000?
+                </p>
+                <p class="font-bold text-kambista-navy underline cursor-pointer">
+                  ¡Obtén un Tipo de Cambio Preferencial!
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <BaseButton type="button" :disabled="isStartDisabled">
-      INICIAR OPERACIÓN
-    </BaseButton>
+      <BaseButton type="button" :disabled="isStartDisabled" @click="handleStartOperation">
+        INICIAR OPERACIÓN
+      </BaseButton>
+    </div>
   </div>
 </template>
 
@@ -186,6 +188,7 @@
 import { ref, computed, onMounted } from 'vue'
 import type { CurrencyCode, ExchangeTab } from '~/types/exchange'
 import { useExchangeApi } from '~/composables/useExchangeApi'
+import { ROUTES } from '~/constants/routes'
 import {
   formatCurrencyAmount,
   parseCurrencyValue,
@@ -525,6 +528,11 @@ function swapCurrencies() {
 
   lastEdited.value = 'send'
   scheduleCalculate()
+}
+
+function handleStartOperation() {
+  if (isStartDisabled.value) return
+  navigateTo(ROUTES.operationSteps)
 }
 
 onMounted(async () => {

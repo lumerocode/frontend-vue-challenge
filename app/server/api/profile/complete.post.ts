@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
         data: {
           name: 'DUPLICATE_DNI',
           title: 'DNI en uso',
-          message: 'El número de documento registrado ya está en uso.'
+          message: 'Número de documento ya está en uso.'
         }
       }
     })

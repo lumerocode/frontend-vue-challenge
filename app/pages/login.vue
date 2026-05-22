@@ -68,7 +68,7 @@ import { ROUTES } from '~/constants/routes'
 import { validateEmail, validatePassword, normalizeLoginCredentials } from '~/utils/auth-validation'
 import BaseInput from '@/components/ui/BaseInput.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
-import ApiErrorModal from '@/components/ui/ApiErrorModal.vue'
+import ApiErrorModal from '@/components/shared/ApiErrorModal.vue'
 
 definePageMeta({
   layout: 'auth'

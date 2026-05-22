@@ -37,7 +37,7 @@
         @open-menu="mobileMenuOpen = true"
       />
 
-      <main class="flex-1 overflow-y-auto px-4 py-6 lg:px-8 lg:py-10">
+      <main class="px-4 py-6 lg:px-8 lg:py-10">
         <slot />
       </main>
     </div>
@@ -54,7 +54,7 @@ import { ref, computed } from 'vue'
 import { useAuthStore } from '~/stores/auth'
 import DashboardSidebar from '@/components/dashboard/DashboardSidebar.vue'
 import DashboardHeader from '@/components/dashboard/DashboardHeader.vue'
-import WhatsAppButton from '@/components/ui/WhatsAppButton.vue'
+import WhatsAppButton from '~/components/shared/WhatsAppButton.vue'
 
 const authStore = useAuthStore()
 

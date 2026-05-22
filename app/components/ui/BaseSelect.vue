@@ -6,7 +6,7 @@
     <div class="relative w-full">
       <select
         v-model="model"
-        class="w-full h-[44px] appearance-none font-sans font-medium text-sm bg-neutral-white border rounded-md py-3 pl-4 pr-10 focus:outline-none transition-colors"
+        class="w-full h-[50px] lg:h-[46px] appearance-none font-sans font-medium text-sm bg-neutral-white border rounded-[10px] py-3 pl-4 pr-10 focus:outline-none transition-colors cursor-pointer"
         :class="[
           model ? 'text-kambista-navy' : 'text-neutral-grayPlaceholder',
           error

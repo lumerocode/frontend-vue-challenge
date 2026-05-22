@@ -1,113 +1,113 @@
 <template>
-  <div class="w-full flex flex-col">
-    <h1 class="font-sans font-bold text-xl lg:text-2xl text-kambista-navy text-center mb-6 lg:mb-8">
-      Completa tus datos
-    </h1>
+  <div class="w-full flex flex-col justify-start lg:justify-center items-center lg:h-[calc(100vh-172px)]">
+    <div class="max-w-[525px] lg:bg-neutral-white lg:rounded-xl lg:shadow-sm lg:px-10 lg:py-10 lg:border lg:border-neutral-grayBg">
+      <h1 class="font-sans font-bold text-xl lg:text-2xl text-kambista-navy text-center mb-6 lg:mb-8">
+        Completa tus datos
+      </h1>
+      <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
+        <BaseInput
+          v-model="fullName"
+          label="Nombres completos"
+          placeholder="Escribe tus nombres y apellidos"
+          autocomplete="name"
+          :error="errors.fullName"
+          @blur="touchField('fullName')"
+          @input="touchField('fullName')"
+        />
 
-    <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
-      <BaseInput
-        v-model="fullName"
-        label="Nombres completos"
-        placeholder="Escribe tus nombres y apellidos"
-        autocomplete="name"
-        :error="errors.fullName"
-        @blur="touchField('fullName')"
-        @input="touchField('fullName')"
-      />
-
-      <div class="flex flex-col gap-1.5">
-        <span class="font-sans font-medium text-sm text-neutral-darkText tracking-wider">
-          Documento
-        </span>
-        <div class="flex gap-3">
-          <div class="w-[40%] min-w-0 lg:w-1/2">
-            <BaseSelect
-              v-model="documentType"
-              placeholder="Tipo"
-              :options="documentTypeOptions"
-              wrapper-class="shrink-0 lg:shrink"
-              :error="errors.documentType"
-              @blur="touchField('documentType')"
-              @change="touchField('documentType')"
-            />
+        <div class="flex flex-col gap-1.5">
+          <span class="font-sans font-medium text-sm text-neutral-darkText tracking-wider">
+            Documento
+          </span>
+          <div class="flex gap-3">
+            <div class="w-[40%] min-w-0 lg:w-1/2">
+              <BaseSelect
+                v-model="documentType"
+                placeholder="Tipo"
+                :options="documentTypeOptions"
+                wrapper-class="shrink-0 lg:shrink"
+                :error="errors.documentType"
+                @blur="touchField('documentType')"
+                @change="touchField('documentType')"
+              />
+            </div>
+            <div class="w-[60%] shrink-0 min-w-0 lg:w-1/2">
+              <BaseInput
+                v-model="documentNumber"
+                placeholder="N° de documento"
+                :error="errors.documentNumber"
+                @blur="touchField('documentNumber')"
+                @input="touchField('documentNumber')"
+              />
+            </div>
           </div>
-          <div class="w-[60%] shrink-0 min-w-0 lg:w-1/2">
+        </div>
+
+        <InfoAlert>
+          Tu documento de identidad debe coincidir con tus datos para evitar inconvenientes al momento de hacer una primera operación.
+        </InfoAlert>
+
+        <div class="flex flex-row gap-3 lg:flex-col lg:gap-5">
+          <div class="w-1/2 min-w-0 lg:w-full">
             <BaseInput
-              v-model="documentNumber"
-              placeholder="N° de documento"
-              :error="errors.documentNumber"
-              @blur="touchField('documentNumber')"
-              @input="touchField('documentNumber')"
+              v-model="phone"
+              label="Celular"
+              placeholder="N° de celular"
+              type="tel"
+              autocomplete="tel"
+              :error="errors.phone"
+              @blur="touchField('phone')"
+              @input="touchField('phone')"
+            />
+          </div>
+          <div class="w-1/2 min-w-0 lg:w-full">
+            <BaseInput
+              v-model="birthDate"
+              label="Fecha de nacimiento"
+              placeholder="DD/MM/AAAA"
+              autocomplete="bday"
+              :error="errors.birthDate"
+              @blur="touchField('birthDate')"
+              @input="touchField('birthDate')"
             />
           </div>
         </div>
-      </div>
 
-      <InfoAlert>
-        Tu documento de identidad debe coincidir con tus datos para evitar inconvenientes al momento de hacer una primera operación.
-      </InfoAlert>
+        <div class="flex flex-col gap-4 mt-1">
+          <BaseCheckbox
+            v-model="acceptedTerms"
+            :error="errors.acceptedTerms"
+            @blur="touchField('acceptedTerms')"
+            @update:model-value="touchField('acceptedTerms')"
+          >
+            He leído y acepto los
+            <a href="#" class="font-semibold text-kambista-navy underline" @click.prevent>Términos y condiciones</a>
+          </BaseCheckbox>
 
-      <div class="flex flex-row gap-3 lg:flex-col lg:gap-5">
-        <div class="w-1/2 min-w-0 lg:w-full">
-          <BaseInput
-            v-model="phone"
-            label="Celular"
-            placeholder="N° de celular"
-            type="tel"
-            autocomplete="tel"
-            :error="errors.phone"
-            @blur="touchField('phone')"
-            @input="touchField('phone')"
-          />
+          <BaseCheckbox
+            v-model="acceptedPrivacy"
+            :error="errors.acceptedPrivacy"
+            @blur="touchField('acceptedPrivacy')"
+            @update:model-value="touchField('acceptedPrivacy')"
+          >
+            Acepto de manera expresa e informada la
+            <a href="#" class="font-semibold text-kambista-navy underline" @click.prevent>Política de Tratamiento de datos personales de Kambista</a>
+          </BaseCheckbox>
         </div>
-        <div class="w-1/2 min-w-0 lg:w-full">
-          <BaseInput
-            v-model="birthDate"
-            label="Fecha de nacimiento"
-            placeholder="DD/MM/AAAA"
-            autocomplete="bday"
-            :error="errors.birthDate"
-            @blur="touchField('birthDate')"
-            @input="touchField('birthDate')"
-          />
+
+        <div class="mt-2 lg:mt-4">
+          <BaseButton type="submit" :loading="isLoading" :disabled="isSubmitDisabled">
+            <span class="lg:inline">REGISTRARME</span>
+          </BaseButton>
         </div>
-      </div>
-
-      <div class="flex flex-col gap-4 mt-1">
-        <BaseCheckbox
-          v-model="acceptedTerms"
-          :error="errors.acceptedTerms"
-          @blur="touchField('acceptedTerms')"
-          @update:model-value="touchField('acceptedTerms')"
-        >
-          He leído y acepto los
-          <a href="#" class="font-semibold text-kambista-navy underline" @click.prevent>Términos y condiciones</a>
-        </BaseCheckbox>
-
-        <BaseCheckbox
-          v-model="acceptedPrivacy"
-          :error="errors.acceptedPrivacy"
-          @blur="touchField('acceptedPrivacy')"
-          @update:model-value="touchField('acceptedPrivacy')"
-        >
-          Acepto de manera expresa e informada la
-          <a href="#" class="font-semibold text-kambista-navy underline" @click.prevent>Política de Tratamiento de datos personales de Kambista</a>
-        </BaseCheckbox>
-      </div>
-
-      <div class="mt-2 lg:mt-4">
-        <BaseButton type="submit" :loading="isLoading" :disabled="isSubmitDisabled">
-          <span class="lg:inline">REGISTRARME</span>
-        </BaseButton>
-      </div>
-    </form>
-
-    <ApiErrorModal
-      v-model="showApiErrorModal"
-      :title="apiErrorPayload.title"
-      :message="apiErrorPayload.message"
-      @close="showApiErrorModal = false"
-    />
+      </form>
+      <ApiErrorModal
+        v-model="showApiErrorModal"
+        :title="apiErrorPayload.title"
+        :message="apiErrorPayload.message"
+        @close="showApiErrorModal = false"
+      />
+    </div>
   </div>
 </template>
 
@@ -128,7 +128,7 @@ import BaseSelect from '@/components/ui/BaseSelect.vue'
 import BaseCheckbox from '@/components/ui/BaseCheckbox.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import InfoAlert from '@/components/ui/InfoAlert.vue'
-import ApiErrorModal from '@/components/ui/ApiErrorModal.vue'
+import ApiErrorModal from '@/components/shared/ApiErrorModal.vue'
 import type { SelectOption } from '@/types/components'
 import type { APIErrorName, ProfileFormData } from '~/types/api'
 

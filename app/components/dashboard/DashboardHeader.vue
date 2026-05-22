@@ -1,7 +1,7 @@
 <template>
-  <header class="bg-kambista-appBg border-b border-neutral-grayLight shrink-0">
+  <header class="bg-neutral-white lg:bg-kambista-appBg border-b border-neutral-grayLight shrink-0">
     <!-- Mobile -->
-    <div class="lg:hidden flex items-center justify-between h-[56px] px-4">
+    <div class="lg:hidden flex items-center justify-between h-[70px] px-4">
       <img src="/assets/img/brand/logo-main.svg" alt="Kambista" class="h-7 object-contain" />
       <button
         type="button"
