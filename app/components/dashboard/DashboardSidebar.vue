@@ -1,7 +1,7 @@
 <template>
   <aside
     class="relative flex flex-col bg-neutral-white h-screen shrink-0 transition-[width] duration-300 ease-in-out"
-    :class="mobile ? 'w-[290px]' : collapsed ? 'w-[72px]' : 'w-[320px]'"
+    :class="mobile ? 'w-[290px] overflow-y-auto' : collapsed ? 'w-[72px]' : 'w-[320px]'"
   >
     <div
       class="flex items-center justify-center shrink-0 py-4"
@@ -14,7 +14,7 @@
       />
     </div>
 
-    <nav class="flex-1 overflow-y-auto py-4 px-2 min-h-0">
+    <nav :class="mobile ? 'flex-1 py-4 px-2' : 'flex-1 overflow-y-auto py-4 px-2 min-h-0'">
       <ul class="flex flex-col gap-0.5">
         <li v-for="item in navItems" :key="item.id">
           <component

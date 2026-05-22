@@ -25,11 +25,11 @@
 </template>
 
 <script setup lang="ts">
-/* Post-onboarding success screen shown before redirecting to the dashboard. */
 import { useAuthStore } from '~/stores/auth'
 import { ROUTES } from '~/constants/routes'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 definePageMeta({
   layout: 'basic-success'
@@ -37,8 +37,22 @@ definePageMeta({
 
 const authStore = useAuthStore()
 const isLoading = ref(false)
+const router = useRouter()
 
 const displayName = computed(() => authStore.userDisplayName ?? 'Usuario')
+
+async function navigateWithFallback(to: string) {
+  try {
+    await navigateTo(to, { replace: true })
+  } catch (e) {
+
+  }
+  setTimeout(() => {
+    if (router.currentRoute.value.fullPath !== to) {
+      window.location.href = to
+    }
+  }, 800)
+}
 
 /* Marks the profile as completed and navigates to the dashboard. */
 const handleContinue = async () => {
@@ -47,7 +61,7 @@ const handleContinue = async () => {
   try {
     authStore.completeProfile()
     await new Promise(resolve => setTimeout(resolve, 800))
-    await navigateTo(ROUTES.dashboard, { replace: true })
+    await navigateWithFallback(ROUTES.dashboard)
   } finally {
     isLoading.value = false
   }

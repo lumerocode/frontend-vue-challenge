@@ -50,6 +50,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { ROUTES } from '~/constants/routes'
 import transactionSuccess from '@/assets/img/illustrations/transaction-success.svg'
@@ -57,13 +58,27 @@ import giftReward from '@/assets/img/illustrations/gift-rewards.svg'
 import piggyBank from '@/assets/img/illustrations/piggy-bank-coins.svg'
 
 const isLoading = ref(false)
+const router = useRouter()
+
+async function navigateWithFallback(to: string) {
+  try {
+    await navigateTo(to)
+  } catch (e) {
+    
+  }
+  setTimeout(() => {
+    if (router.currentRoute.value.fullPath !== to) {
+      window.location.href = to
+    }
+  }, 700)
+}
 
 const goHome = async () => {
   if (isLoading.value) return
   isLoading.value = true
   try {
     await new Promise(resolve => setTimeout(resolve, 800))
-    await navigateTo(ROUTES.dashboard)
+    await navigateWithFallback(ROUTES.dashboard)
   } finally {
     isLoading.value = false
   }
