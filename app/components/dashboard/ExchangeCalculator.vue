@@ -110,7 +110,7 @@
               <p class="text-kambista-navy">
                 Ahorro estimado:
               </p>
-              <p class="font-bold text-kambista-navy"">
+              <p class="font-bold text-kambista-navy">
                 {{ savingsDisplay }}
               </p>
             </div>

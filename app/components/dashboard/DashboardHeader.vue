@@ -36,7 +36,7 @@
           <span>Tienes</span>
           <span class="font-bold text-kambista-navy">2500</span>
           <span>Koinks</span>
-          <img :src="iconCoin" alt="" class="w-5 h-5 shrink-0" />
+          <img :src="iconCoin" alt="" class="w-5 h-5 shrink-0 animate-float"/>
         </p>
       </div>
 
